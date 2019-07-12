@@ -1,0 +1,21 @@
+.modal-content {
+  .modal-header {
+    display: none;
+  }
+
+  .modal-body {
+    min-width: 450px;
+
+    .modal-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .modal-footer {
+      .btn-primary {
+        margin-left: 1.5em;
+      }
+    }
+  }
+}

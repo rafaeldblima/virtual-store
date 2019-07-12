@@ -1,0 +1,37 @@
+<section class="store-default-modal default-remove-modal">
+
+  <section class="modal-header">
+    <h2 class="text-left modal-title">
+      <span>Confirmar ação</span>
+      <a class="times clickable" (click)="close()">
+        <i class="eva eva-close-outline"></i>
+      </a>
+    </h2>
+
+  </section>
+
+  <form class="storestore-modal-form" (submit)="confirm()" novalidate>
+
+    <section class="modal-body mb-2">
+      <div class="custom-message">
+        <div class="message">
+          Deseja realmente remover o item selecionado?
+        </div>
+      </div>
+    </section>
+
+    <div class="modal-footer">
+      <div class="button-group w-100 d-flex flex-row justify-content-end">
+        <button class="btn btn-outline-secondary store-btn clear-btn float-right mt-3"
+                (click)="close()" type="button">
+          Cancelar
+        </button>
+        <button class="btn btn-primary store-btn mt-3 mr-0"
+                type="submit" [disabled]="!object._id">
+          Confirmar
+        </button>
+      </div>
+
+    </div>
+  </form>
+</section>
