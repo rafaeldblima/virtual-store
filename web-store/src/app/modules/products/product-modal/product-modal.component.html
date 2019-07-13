@@ -1,0 +1,65 @@
+<section class="default-modal" *ngIf="object">
+  <section class="modal-header">
+    <h3 class="text-left modal-title">
+      <span *ngIf="!object.id">Novo produto</span>
+      <span *ngIf="object.id">Editar produto</span>
+    </h3>
+
+    <a class="times clickable" (click)="close()">
+      <i class="eva eva-close-outline"></i>
+    </a>
+  </section>
+
+  <form class="modal-form" [formGroup]="modalForm" (ngSubmit)="save()">
+    <section class="modal-body">
+
+
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input class="form-control" type="text" placeholder="Nome" id="name" name="name" formControlName="name"/>
+      </div>
+      <div class="form-group">
+        <label for="category">Categoria</label>
+        <select class="form-control" name="category" id="category" formControlName="category">
+          <option [ngValue]="null">Selecione</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.name|resumir:25}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="price">Preço</label>
+        <input class="form-control" type="number" placeholder="Preço" id="price" name="price"
+               formControlName="price"/>
+      </div>
+      <div class="form-group">
+        <label for="code">Código</label>
+        <input class="form-control" type="text" placeholder="Código" id="code" name="code"
+               formControlName="code"/>
+      </div>
+      <div class="form-group">
+        <label for="stockQuantity">Quantidade em estoque</label>
+        <input class="form-control" type="number" placeholder="Quantidade em estoque" id="stockQuantity"
+               name="stockQuantity" formControlName="stockQuantity"/>
+      </div>
+      <div class="form-group">
+        <label for="description">Descrição</label>
+        <textarea class="form-control" type="text" placeholder="Descrição" id="description" name="description"
+                  formControlName="description"></textarea>
+      </div>
+
+    </section>
+
+    <div class="modal-footer">
+      <div class="button-group w-100 d-flex flex-row justify-content-end">
+        <button type="button" (click)="close()"
+                class="btn btn-outline-secondary clear-btn float-right mt-3">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary mt-3 mr-0" [disabled]="modalForm.invalid">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

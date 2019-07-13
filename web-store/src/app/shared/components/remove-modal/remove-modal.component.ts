@@ -13,7 +13,6 @@ export class RemoveModalComponent implements OnInit, IModalDialog {
   public object: any;
   public saveLoading: boolean;
   public closingSubject$: Subject<void>;
-  private event: string;
 
   dialogInit(
     reference: ComponentRef<IModalDialog>,
@@ -35,7 +34,7 @@ export class RemoveModalComponent implements OnInit, IModalDialog {
     }
   }
 
-  public async confirm() {
+  public confirm() {
     this.saveLoading = true;
     this.removeService.objectRemoveConfirm(this.object);
     this.close();

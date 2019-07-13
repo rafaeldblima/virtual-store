@@ -1,0 +1,45 @@
+@import "assets/styles/modal";
+@import "assets/styles/section";
+@import '~ngx-toastr/toastr';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
+
+.clickable {
+  cursor: pointer;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* border: 1px solid salmon; */
+  height: 100vh;
+  width: 100vw;
+}
+
+/* TOASTR BUGFIX */
+#toast-container > div {
+  opacity: 1;
+}
+.toast {
+  font-size: initial !important;
+  border: initial !important;
+  backdrop-filter: blur(0) !important;
+}
+.toast-success {
+  background-color: #51A351 !important;
+}
+.toast-error {
+  background-color: #BD362F !important;
+}
+.toast-info {
+  background-color: #2F96B4 !important;
+}
+.toast-warning {
+  background-color: #F89406 !important;
+}

@@ -3,11 +3,10 @@
   <section class="modal-header">
     <h2 class="text-left modal-title">
       <span>Confirmar ação</span>
-      <a class="times clickable" (click)="close()">
-        <i class="eva eva-close-outline"></i>
-      </a>
     </h2>
-
+    <a class="times clickable" (click)="close()">
+      <i class="eva eva-close-outline"></i>
+    </a>
   </section>
 
   <form class="storestore-modal-form" (submit)="confirm()" novalidate>
@@ -27,7 +26,7 @@
           Cancelar
         </button>
         <button class="btn btn-primary store-btn mt-3 mr-0"
-                type="submit" [disabled]="!object._id">
+                type="submit" [disabled]="!object.id">
           Confirmar
         </button>
       </div>

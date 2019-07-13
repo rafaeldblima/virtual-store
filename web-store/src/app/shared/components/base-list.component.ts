@@ -7,6 +7,7 @@ import { RemoveModalComponent } from './remove-modal/remove-modal.component';
 import { DependencyInjector } from '../dependency-injector';
 import { RemoveService } from '../services/remove.service';
 import { BaseModel } from '../models/base.model';
+import * as $ from 'jquery';
 
 export class BaseListComponent<T extends BaseModel> extends BaseComponent implements OnInit, OnDestroy {
 
@@ -16,15 +17,17 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
   protected modalComponent: any;
 
   protected service: BaseHttpService<T>;
-  protected modalService: ModalDialogService;
-  protected viewRef: ViewContainerRef;
   protected listSub: Subscription;
   protected subsDelete: Subscription;
   protected removeService: RemoveService;
   private removedSubscription: Subscription;
   private updateList: Subscription;
+  public filters: any = {};
 
-  constructor() {
+  constructor(
+    protected modalService: ModalDialogService,
+    protected viewRef: ViewContainerRef
+  ) {
     super();
     this.removeService = DependencyInjector.inject(RemoveService);
   }
@@ -53,9 +56,17 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
   public getList() {
     this.objects = new Array<T>();
     this.loading = true;
-    this.listSub = this.service.getList().subscribe((response: any) => {
-      if (response.length > 0) {
-        this.objects = response;
+    const filter: any = {};
+    $.extend(true, filter, this.filters);
+    filter.count = 10;
+    filter.order = 'ASC';
+    if (!filter.page) {
+      filter.page = 0;
+    }
+    filter.sort = 'id';
+    this.listSub = this.service.getList(filter).subscribe((response) => {
+      if (!response.empty) {
+        this.objects = response.content;
         this.noResults = false;
       } else {
         this.noResults = true;
@@ -91,18 +102,9 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
     });
   }
 
-  public openGenericModal(object: any, component: any) {
-    let data = {};
-    data = Object.assign(data, object);
-    this.modalService.openDialog(this.viewRef, {
-      childComponent: component,
-      data: data
-    });
-  }
-
   public remove(object) {
     object.loading = true;
-    this.subsDelete = this.service.delete(object._id).subscribe(() => {
+    this.subsDelete = this.service.delete(object.id).subscribe(() => {
       this.toastr.success('Exclusão realizada com sucesso.');
       this.getList();
     }, error => {

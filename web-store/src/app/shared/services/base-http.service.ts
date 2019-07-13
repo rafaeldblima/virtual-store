@@ -1,16 +1,18 @@
 import { DependencyInjector } from '../dependency-injector';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { BaseModel } from '../models/base.model';
+import { PaginatedResponse } from '../models/paginated-response.model';
 
 
-export abstract class BaseHttpService<T extends {}> {
+export abstract class BaseHttpService<T extends BaseModel> {
 
   protected httpClient: HttpClient;
   protected serverUrl: string;
   public updateList = new Subject();
 
-  constructor() {
+  protected constructor() {
     this.httpClient = DependencyInjector.inject(HttpClient);
     this.serverUrl = environment.API.BASE_URL;
   }
@@ -27,8 +29,20 @@ export abstract class BaseHttpService<T extends {}> {
     this.serverUrl = serverUrl;
   }
 
-  public getList() {
+  public getListAll() {
     return this.httpClient.get<T[]>(this.serverUrl);
+  }
+
+  public getList(filters?: {}) {
+    let params = new HttpParams();
+    if (filters) {
+      Object.keys(filters).forEach(function (key) {
+        if (filters[key] !== null && filters[key] !== undefined) {
+          params = params.append(key, filters[key]);
+        }
+      });
+    }
+    return this.httpClient.get<PaginatedResponse<T>>(this.serverUrl, {params});
   }
 
   public getDetail(id: number) {
@@ -36,13 +50,12 @@ export abstract class BaseHttpService<T extends {}> {
   }
 
   public create(object: T) {
-    // @ts-ignore
-    delete object._id;
+    delete object.id;
     return this.httpClient.post<T>(this.serverUrl, object);
   }
 
-  public update(object: T, id: string) {
-    const url = `${this.serverUrl}${id}/`;
+  public update(object: T) {
+    const url = `${this.serverUrl}${object.id}/`;
     return this.httpClient.put<T>(url, object);
   }
 

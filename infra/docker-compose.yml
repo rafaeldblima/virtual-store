@@ -27,6 +27,28 @@ services:
       - 8080:8080
     networks:
       - store
+    volumes:
+      - ./maven-repo:/root/.m2
+
+  front:
+    image: rafaeldbl/web-store
+    build:
+      context:
+        ./../web-store
+      dockerfile:
+        Dockerfile
+      args:
+        ENV_CONFIG: docker
+    ports:
+      - 80:80
+    networks:
+      - store
+    volumes:
+    - ./data/server/logs:/usr/src/app/logs
+    - ./data/server/logs/nginx:/var/log/nginx/
+    - ./configs/nginx:/etc/nginx/conf.d
+    - ./data/server/static/:/usr/src/app/static
+    - ./data/server/uploads/:/usr/src/app/uploads
 
 networks:
   store:
