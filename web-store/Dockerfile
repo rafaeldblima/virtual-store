@@ -9,6 +9,8 @@ WORKDIR $APP_PATH
 
 COPY package*.json $APP_PATH/
 
+RUN npm rebuild node-sass
+
 RUN npm install -g @angular/cli
 
 RUN npm install
