@@ -13,9 +13,8 @@
 
       <!-- Card Content Section -->
       <section class="card-content">
-        <!--        TODO LOADER E NO RESULTS -->
-        <!--<app-loader-section *ngIf="loading"></app-loader-section>-->
-        <!--<app-no-result *ngIf="!loading && noResults"></app-no-result>-->
+        <app-loader-section *ngIf="loading"></app-loader-section>
+        <app-no-result *ngIf="!loading && noResults"></app-no-result>
         <div class="table-container" *ngIf="!loading && !noResults">
           <table class="table table-striped table-hover">
             <thead>
@@ -53,20 +52,7 @@
         </div>
       </section>
 
-      <!--        TODO Pagination -->
-      <!-- Paginator Section -->
-      <!--<section class="main-paginator-section">-->
-      <!--<div class="label">{{paginator.totalResults}} resultado(s)</div>-->
-      <!--<div class="pages" *ngIf="paginator.totalPages > 1">-->
-      <!--<pagination [boundaryLinks]="true" [totalItems]="paginator.totalResults" [(ngModel)]="paginator.pageNumber"-->
-      <!--(pageChanged)="pageChanged($event)" [maxSize]="5" [rotate]="true"-->
-      <!--previousText="<i class='eva eva-arrow-ios-back-outline'></i>"-->
-      <!--nextText="<i class='eva eva-arrow-ios-forward-outline'></i>"-->
-      <!--firstText="<i class='eva eva-arrowhead-left-outline'></i>"-->
-      <!--lastText="<i class='eva eva-arrowhead-right-outline'></i>">-->
-      <!--</pagination>-->
-      <!--</div>-->
-      <!--</section>-->
+      <app-paginator [paginator]="paginator" (pageChange)="pageChanged($event)"></app-paginator>
 
     </div>
   </div>

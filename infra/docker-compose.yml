@@ -13,7 +13,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: store
     volumes:
-      - ./init:/docker-entrypoint-initdb.d/
+      - ./data/database/data:/var/lib/postgresql/data
   service:
     depends_on:
       - postgres
@@ -31,6 +31,8 @@ services:
       - ./maven-repo:/root/.m2
 
   front:
+    depends_on:
+      - service
     image: rafaeldbl/web-store
     build:
       context:

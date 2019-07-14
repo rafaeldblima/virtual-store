@@ -8,6 +8,7 @@ import { DependencyInjector } from '../dependency-injector';
 import { RemoveService } from '../services/remove.service';
 import { BaseModel } from '../models/base.model';
 import * as $ from 'jquery';
+import { Paginator } from '../models/paginator.model';
 
 export class BaseListComponent<T extends BaseModel> extends BaseComponent implements OnInit, OnDestroy {
 
@@ -15,6 +16,7 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
   public objects: T[];
   public noResults = true;
   protected modalComponent: any;
+  public paginator: Paginator;
 
   protected service: BaseHttpService<T>;
   protected listSub: Subscription;
@@ -34,6 +36,7 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
 
   public ngOnInit() {
     this.objects = new Array<T>();
+    this.paginator = new Paginator();
     this.listenToEvents();
     this.getList();
   }
@@ -54,6 +57,7 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
   }
 
   public getList() {
+    this.setPaginator();
     this.objects = new Array<T>();
     this.loading = true;
     const filter: any = {};
@@ -62,13 +66,17 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
     filter.order = 'ASC';
     if (!filter.page) {
       filter.page = 0;
+    } else {
+      filter.page = filter.page - 1;
     }
     filter.sort = 'id';
     this.listSub = this.service.getList(filter).subscribe((response) => {
       if (!response.empty) {
         this.objects = response.content;
+        this.setPaginator(response, this.filters.page);
         this.noResults = false;
       } else {
+        this.setPaginator();
         this.noResults = true;
       }
     }, (error) => {
@@ -128,6 +136,32 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
         this.getList();
       }
     });
+  }
+
+  protected setPaginator(response?: any, page?: number, limit?: number): void {
+    if (response && !page) {
+      page = 0;
+      this.filters.page = 1;
+    }
+    if (!limit) {
+      limit = 10;
+      this.filters.count = 10;
+    }
+    if (page || page === 0) {
+      this.paginator.pageSize = limit;
+      this.paginator.pageNumber = page;
+      this.paginator.totalResults = response.totalElements;
+      this.paginator.totalPages = Math.ceil(response.totalElements / limit);
+    } else {
+      this.paginator.totalResults = 0;
+      this.paginator.totalPages = 0;
+      this.paginator.pageNumber = 1;
+    }
+  }
+
+  public pageChanged(event: any) {
+    this.filters.page = event.page;
+    this.getList();
   }
 
 

@@ -1,0 +1,12 @@
+<section class="dqm-main-paginator-section mt-large" *ngIf="paginator.totalResults && paginator.totalResults > 0">
+  <div class="label">{{paginator.totalResults}} resultado(s)</div>
+  <div class="pages" *ngIf="paginator.totalPages > 1">
+    <pagination [boundaryLinks]="true" [totalItems]="paginator.totalResults" [ngModel]="paginator.pageNumber"
+                (pageChanged)="pageChanged($event)" [maxSize]="5" [rotate]="true"
+                previousText="<i class='eva eva-arrow-ios-back-outline'></i>"
+                nextText="<i class='eva eva-arrow-ios-forward-outline'></i>"
+                firstText="<i class='eva eva-arrowhead-left-outline'></i>"
+                lastText="<i class='eva eva-arrowhead-right-outline'></i>">
+    </pagination>
+  </div>
+</section>

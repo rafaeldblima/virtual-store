@@ -67,7 +67,7 @@ export abstract class BaseModalComponent<T extends BaseModel> extends BaseCompon
         this.toastr.success(message);
       }, error1 => {
         console.error(error1);
-        let message = 'Não foi possível salvar o item.';
+        message = 'Não foi possível salvar o item.';
         if (this.CUSTOM_ERROR_MSG) {
           message = this.CUSTOM_ERROR_MSG;
         }

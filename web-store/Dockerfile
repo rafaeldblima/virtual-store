@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as 'builder'
-FROM node:10.9.0-alpine
+FROM node:10.9.0-alpine as build-stage
 
 ENV APP_PATH /usr/src/app
 

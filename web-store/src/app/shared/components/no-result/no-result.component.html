@@ -1,0 +1,12 @@
+<div class="card card-no-results">
+    <div class="card-body">
+        <div class="loader-message">
+            <div class="label text-{{class}}" [ngStyle]="{'font-weight': weight}">
+                <span class="fas fa-info-circle pl-2" *ngIf="class == 'info'"></span>
+                <span class="fas fa-exclamation-triangle pl-2" *ngIf="class == 'warning'"></span>
+                <span class="fas fa-exclamation-circle pl-2" *ngIf="class == 'danger'"></span>
+                {{message}}.
+            </div>
+        </div>
+    </div>
+</div>

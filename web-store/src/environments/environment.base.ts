@@ -1,7 +1,7 @@
 export const base = {
     production: true,
     API: {
-        BASE_URL: `http://service:8080/api/`,
+        BASE_URL: `http://localhost/api/`,
         CATEGORY: 'category/',
         PRODUCTS: 'product/',
     }

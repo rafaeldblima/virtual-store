@@ -12,3 +12,11 @@ infra/maven-repo/
 \.idea/vcs\.xml
 
 \.idea/workspace\.xml
+
+infra/data/server/logs/access\.log
+
+infra/data/server/logs/error\.log
+
+infra/data/server/logs/nginx/access\.log
+
+infra/data/server/logs/nginx/error\.log

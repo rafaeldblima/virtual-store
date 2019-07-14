@@ -1,0 +1,16 @@
+.card.card-no-results {
+    .card-body {
+        .loader-message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            color: #494C51;
+            font-size: 18px;
+
+            .label {
+                padding-left: 10px;
+            }
+        }
+    }
+}
