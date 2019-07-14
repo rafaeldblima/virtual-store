@@ -10,6 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LoaderSectionComponent } from './components/loader-section/loader-section.component';
 import { NoResultComponent } from './components/no-result/no-result.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { NoResultComponent } from './components/no-result/no-result.component';
     PaginatorComponent,
     LoaderSectionComponent,
     NoResultComponent,
+    HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
