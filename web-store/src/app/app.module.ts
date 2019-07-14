@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,9 @@ import { ModalDialogModule } from 'ngx-modal-dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModulesModule } from './modules/modules.module';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { ModulesModule } from './modules/modules.module';
     NgxMaskModule.forRoot(),
     ModulesModule
   ],
-  providers: [],
+  providers: [
+    [{provide: LOCALE_ID, useValue: 'pt'}]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

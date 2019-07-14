@@ -19,6 +19,11 @@
         <input class="form-control" type="text" placeholder="Nome" id="name" name="name" formControlName="name"/>
       </div>
       <div class="form-group">
+        <label for="code">Código</label>
+        <input class="form-control" type="text" placeholder="Código" id="code" name="code"
+               formControlName="code"/>
+      </div>
+      <div class="form-group">
         <label for="category">Categoria</label>
         <select class="form-control" name="category" id="category" formControlName="category">
           <option [ngValue]="null">Selecione</option>
@@ -28,24 +33,19 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="price">Preço</label>
-        <input class="form-control" type="number" placeholder="Preço" id="price" name="price"
-               formControlName="price"/>
+        <label for="description">Descrição</label>
+        <textarea class="form-control" type="text" placeholder="Descrição" id="description" name="description"
+                  formControlName="description"></textarea>
       </div>
       <div class="form-group">
-        <label for="code">Código</label>
-        <input class="form-control" type="text" placeholder="Código" id="code" name="code"
-               formControlName="code"/>
+        <label for="price">Preço</label>
+        <input class="form-control" type="text" placeholder="Preço" id="price" name="price"
+               formControlName="price" prefix="R$ " mask="dot_separator.2"/>
       </div>
       <div class="form-group">
         <label for="stockQuantity">Quantidade em estoque</label>
         <input class="form-control" type="number" placeholder="Quantidade em estoque" id="stockQuantity"
                name="stockQuantity" formControlName="stockQuantity"/>
-      </div>
-      <div class="form-group">
-        <label for="description">Descrição</label>
-        <textarea class="form-control" type="text" placeholder="Descrição" id="description" name="description"
-                  formControlName="description"></textarea>
       </div>
 
     </section>
