@@ -36,9 +36,11 @@ public class ProductController {
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "count", defaultValue = "10", required = false) int count,
             @RequestParam(value = "order", defaultValue = "ASC", required = false) Sort.Direction direction,
-            @RequestParam(value = "sort", defaultValue = "name", required = false) String sortProperty
+            @RequestParam(value = "sort", defaultValue = "name", required = false) String sortProperty,
+            @RequestParam(defaultValue = "", required = false) String name,
+            @RequestParam(defaultValue = "", required = false) String description
     ) {
-        return service.getAllPaginated(page, count, direction, sortProperty);
+        return service.getAllPaginated(page, count, direction, sortProperty, name, description);
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
