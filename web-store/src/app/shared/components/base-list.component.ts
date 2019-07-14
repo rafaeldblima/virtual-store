@@ -56,8 +56,11 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
     }
   }
 
-  public getList() {
-    this.setPaginator();
+  public getList(fromFilter?) {
+    if (fromFilter) {
+      this.filters.page = 1;
+      this.setPaginator();
+    }
     this.objects = new Array<T>();
     this.loading = true;
     const filter: any = {};
@@ -86,6 +89,12 @@ export class BaseListComponent<T extends BaseModel> extends BaseComponent implem
     }, () => {
       this.loading = false;
     });
+  }
+
+  public clearFilters(): void {
+    this.filters = {};
+    this.setPaginator();
+    this.getList();
   }
 
   public openRemoveModal(object: T) {

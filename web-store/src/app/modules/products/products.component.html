@@ -2,10 +2,34 @@
 <section class="checklist-section">
 
   <!-- Page header section -->
-  <section class="main-page-header float-right row mx-0">
-    <button type="button" (click)="create()" class="btn btn-primary btn mb-2 mx-0">
-      Novo produto
-    </button>
+  <section class="main-page-header w-100 mb-4">
+    <form (ngSubmit)="getList(true)" novalidate>
+      <div class="row">
+
+        <div class="col">
+          <label for="name">Nome</label>
+          <input class="form-control" type="text" placeholder="Nome" id="name" name="name" [(ngModel)]="filters.name"/>
+        </div>
+        <div class="col">
+          <label for="name">Descrição</label>
+          <input class="form-control" type="text" placeholder="Descrição" id="description" name="description"
+                 [(ngModel)]="filters.description"/>
+        </div>
+        <div class="col-2 d-flex align-items-end justify-content-between">
+          <div class="">
+            <button type="submit" (click)="clearFilters()" class="btn btn-secondary btn mr-2">
+              Limpar
+            </button>
+            <button type="submit" class="btn btn-primary btn">
+              Buscar
+            </button>
+          </div>
+          <button type="button" (click)="create()" class="btn btn-primary btn">
+            Novo produto
+          </button>
+        </div>
+      </div>
+    </form>
   </section>
 
   <div class="card card w-100">

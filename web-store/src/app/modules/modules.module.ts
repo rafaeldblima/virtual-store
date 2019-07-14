@@ -4,7 +4,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
@@ -14,7 +14,8 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    FormsModule
   ],
   bootstrap: [
     ProductModalComponent
